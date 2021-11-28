@@ -1,0 +1,19 @@
+[Unit]
+# 服务描述
+Description=executable
+# 指定了在systemd在执行完那些target之后再启动该服务
+After=syslog.target
+
+[Service]
+User=root
+WorkingDirectory=/opt
+ExecStart=executable.jar run
+ExecReload=executable.jar restart
+ExecStop=executable.jar stop
+SuccessExitStatus=143
+Restart=always
+PrivateTmp=true=/opt/exec/
+
+[Install]
+# 多用户
+WantedBy=multi-user.target
